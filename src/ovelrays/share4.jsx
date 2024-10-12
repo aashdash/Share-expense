@@ -49,7 +49,6 @@ export const Sh4 = () => {
     setModal5(true)
     setModal4(false);
     await addFriends2({ sharename, money2 });
-    //nav('/home')
 
     const friendsWithMembers = friends.filter(friend => friend.members);
     if (friendsWithMembers.length > 0) {

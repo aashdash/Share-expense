@@ -49,7 +49,6 @@ export  const Form=()=>{
     
 
     const handleform=async(e)=>{
-        //e.preventDefault()
         console.log(e)
         setModal(false)
         setModal3(true)

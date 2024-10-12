@@ -25,7 +25,7 @@ export const Section1 = () => {
       try {
         await signOut(database);
         localStorage.clear(); 
-        nav("/"); 
+        nav("/signup"); 
       } catch (error) {
         console.error("Sign-out error: ", error);
       }
@@ -35,6 +35,7 @@ export const Section1 = () => {
       handleSignOut();
     }
   }, [isAuth,handleSignOut ]);
+ 
 
   return (
     <div className="bgred-300 flex flex-col justify-center items-center 
@@ -60,8 +61,8 @@ export const Section1 = () => {
         md:my-2 md:w-[400px] md:h-full md:gap-3 
         lg:h-[230px] lg:w-[320px] lg:my-4 lg:mx-3 ">
 
-        {user?.photoURL &&
-          <div className=" bg-red-100 rounded-full">
+        {user?.photoURL ?
+          <div className=" bg-red-100 rounded-full border-2 border-dotted  border-green-200">
             <img
               src={user?.photoURL} 
               alt="fr.jpeg"
@@ -70,6 +71,13 @@ export const Section1 = () => {
                 e.target.src = "fr.jpeg"}}
             />
           </div>
+          : <div className=" bg-red-100 rounded-full border-2 border-dotted  border-green-200">
+          <img
+            src='fr.jpeg'
+            alt="frg"
+            className="w-32 h-32 md:h-36 md:w-36 rounded-full object-cover"
+          />
+        </div>
         }
       
         <h1 className="text-lg font-medium font-palanquin md:text-xl md:text-white">{name}</h1>

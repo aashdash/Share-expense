@@ -5,10 +5,8 @@ import React, { useEffect } from "react";
 import { useGetUserInfo } from "../firestore/getUseInfo";
 import {useAuthState} from "react-firebase-hooks/auth"
 import { database } from "../pages/firebaseConfig";
-import { Sh } from "../ovelrays/share1";
 import { useAppContext } from "../ovelrays/context";
-import { Sh3 } from "../ovelrays/share3";
-import { Sh4 } from "../ovelrays/share4";
+
 
 
 
@@ -17,13 +15,13 @@ export const Front = () => {
   const  {isAuth,name}=useGetUserInfo()
   const [user]=useAuthState(database)
   const nav = useNavigate();
-  const {modal,modal3,modal4,setModal}=useAppContext()
+  const {setModal}=useAppContext()
 
   const handleSignOut = async () => {
     try {
       await signOut(database);
       localStorage.clear(); 
-      nav("/"); 
+      nav("/signup"); 
     } catch (error) {
       console.error("Sign-out error: ", error);
     }
@@ -74,16 +72,23 @@ export const Front = () => {
 
         
 
-        {user?.photoURL &&
-          <div className=" bg-red-100 rounded-full">
+{user?.photoURL ?
+          <div className=" bg-red-100 rounded-full border-2 border-dotted  border-green-200">
             <img
               src={user?.photoURL} 
               alt="fr.jpeg"
-              className="w-32 h-32 md:h-44 md:w-44 rounded-full object-cover"
+              className="w-32 h-32 md:h-36 md:w-36 rounded-full object-cover"
               onError={(e) => {
                 e.target.src = "fr.jpeg"}}
             />
           </div>
+          : <div className=" bg-red-100 rounded-full border-2 border-dotted  border-green-200">
+          <img
+            src='fr.jpeg'
+            alt="frg"
+            className="w-32 h-32 md:h-36 md:w-36 rounded-full object-cover"
+          />
+        </div>
         }
       
         <h1 className="text-lg font-medium font-palanquin md:text-xl md:text-white">{name}</h1>
@@ -113,9 +118,6 @@ export const Front = () => {
 
       
     </div>
-        {modal  && <Sh  />}
-        {modal3 && <Sh3 />}
-        {modal4 && <Sh4 />}
     </div>
   )
 }

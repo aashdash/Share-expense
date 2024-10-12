@@ -12,7 +12,7 @@ export const Forgot = () => {
     const rest=e.target.email.value
     sendPasswordResetEmail(database,rest).then(data=>{
       alert("Check UR Email")
-      nav('/')
+      nav('/home')
     }).catch(err=>{
       alert(err.code)
     })

@@ -18,6 +18,7 @@ export const auth=(results)=>{
 
 export const Signup = () => {
   const nav=useNavigate()
+
   const withGoogle= async()=>{
     try{
     const result=await signInWithPopup(database,provider)
@@ -46,7 +47,7 @@ export const Signup = () => {
     })
     
   }
-
+ 
   
   return (
     <div className='md:bg-blue-300'>
@@ -155,4 +156,14 @@ const ProtectedRoute = ({ children }) => {
 };
 
 export default ProtectedRoute;
+
+export const ProtectedRoute2 = ({ children }) => {
+  const { isAuth } = useGetUserInfo(); 
+
+  if (isAuth) {
+    return <Navigate to="/home" />  
+  }
+  return children;
+};
+
 

@@ -1,36 +1,34 @@
-import { BrowserRouter as Router,Routes, Route, Navigate  } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
 import { Register } from './pages/register';
 import { Forgot } from './pages/forgot';
-import Home from './pages/Home';
-import ProtectedRoute , { Signup } from './pages/SignUp';
+import ProtectedRoute, { Signup,ProtectedRoute2 } from './pages/SignUp';
 import { useGetUserInfo } from './firestore/getUseInfo';
-import { Front } from './sections/front';
+import { AppProvider } from './ovelrays/context'; 
+import { Main } from './sections/main';
+
 
 function App() {
   const { isAuth } = useGetUserInfo(); 
   return (
-    <div className="app">
-      <Router>
-        <Routes>
-          <Route 
-            path='/signup' 
-            element={ isAuth ? <Navigate to="/home"/> : <Signup />} />
-          <Route path="/register" element={<Register/>} />
-          <Route path='/forgot' element={<Forgot/>}/>
-          <Route path='/statu' element={<Front/>}/>
-          <Route path='/home' 
-                 element={
-                  <ProtectedRoute>
-                   <Home/>
-                  </ProtectedRoute>
-                 }/>
-          <Route path="/" element={<Navigate to="/signup" />} />
-        </Routes>
-      </Router>
-    </div>
+    <AppProvider>
+      <div className="app">
+        <Router>
+          <Routes>
+            <Route path='/home' element={
+              <ProtectedRoute><Main/></ProtectedRoute>} /> 
+            <Route path="/" element={isAuth ? <Navigate to="/home"/> : <Navigate to="/signup"/>} />
+            <Route path='/signup' element={
+              <ProtectedRoute2><Signup /></ProtectedRoute2>} />
+            <Route path="/register" element={isAuth ? <Navigate to="/home"/> : <Register/>} />
+            <Route path='/forgot' element={isAuth ? <Navigate to="/home"/> : <Forgot/>}/>            
+          </Routes>
+        </Router>
+      </div>
+    </AppProvider>
   );
 }
 
-export default App;
 
+export default App;

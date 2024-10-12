@@ -8,7 +8,6 @@ export const Section2 = () => {
     const { friends,calci } = useGetfriends();
     const { total,share1 } = calci
     const {setModal4} =useAppContext()
-    //const share = useStake()
     const statu = useStatus()
   return (
     <div className='flex items-center justify-center flex-col

@@ -1,9 +1,5 @@
 import React from "react";
 import { AppProvider, useAppContext } from "../ovelrays/context";
-import { Sh } from "../ovelrays/share1";
-import { Sh2 } from "../ovelrays/Share2";
-import { Sh3 } from "../ovelrays/share3";
-import { Sh4 } from "../ovelrays/share4";
 import { Section2 } from "../sections/section2";
 import { Section3 } from "../sections/section3";
 import { Section1 } from "../sections/section1";
@@ -15,10 +11,6 @@ import { Main } from "../sections/main";
 
 export const Home = () => {
    const {
-    modal,
-    modal2,
-    modal3,
-    modal4,
     showThirdSection,
     setShowThirdSection
   } = useAppContext();
@@ -72,11 +64,6 @@ export const Home = () => {
             </div>
             
         </div>
-        
-        {modal  && <Sh  />}
-        {modal2 && <Sh2 />}
-        {modal3 && <Sh3 />}
-        {modal4 && <Sh4 />}
       </div>
   );
 };
