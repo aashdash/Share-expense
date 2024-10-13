@@ -11,12 +11,12 @@ export const Sh2 = () => {
   const { userID } = useGetUserInfo(); 
   const deleteUserDocuments = async () => {
     try {
-      const friendsCollection = collection(db, "friends");
+      const friendsCollection = collection(db, userID);
       const friendsSnapshot = await getDocs(friendsCollection);
 
       const batchDeletePromises = friendsSnapshot.docs
         .filter((document) => document.data().userID === userID)
-        .map((document) => deleteDoc(doc(db, "friends", document.id)));
+        .map((document) => deleteDoc(doc(db, userID, document.id)));
 
       await Promise.all(batchDeletePromises);
       console.log("User's documents deleted successfully!");

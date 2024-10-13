@@ -3,8 +3,9 @@ import { db } from "../pages/firebaseConfig";
 import { useGetUserInfo } from "./getUseInfo";
 
 export const useAddFriends = () => {
-  const friendsCollection = collection(db, "friends");
   const { userID } = useGetUserInfo();
+  const friendsCollection = collection(db, userID);
+  
 
   const addFriends = async ({ name, budget, members, friends2, money }) => {
     await addDoc(friendsCollection, {
@@ -28,7 +29,7 @@ export const useAddFriends = () => {
   };
 
   const updateFriendMoney = async (docID, updatedMoney) => {
-    const friendDoc = doc(db, "friends", docID);
+    const friendDoc = doc(db, userID, docID);
     await updateDoc(friendDoc, {
       money: updatedMoney, 
     });
